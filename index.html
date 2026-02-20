@@ -3,12 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard MRV - AMBIENTE DE TESTE</title>
-  <link rel="stylesheet" href="style-teste.css">
+  <title>Dashboard MRV - TESTE FINAL</title>
+  <style>
+    /* CSS EMBUTIDO */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; font-family: Arial, sans-serif; overflow: hidden; background: #fff; }
+    h1 { background: rgb(6, 94, 3); color: white; text-align: center; padding: 15px; font-size: 20px; height: 55px; }
+    .container { display: flex; height: calc(100% - 55px); padding: 15px; gap: 20px; }
+    .mapa-area { flex: 1; display: flex; flex-direction: column; height: 100%; }
+    .titulo-mapa { height: 40px; font-weight: bold; text-align: center; font-size: 18px; color: #333; }
+    .caixa-mapa { width: 100%; background: #fdfdfd; border: 1px solid #eee; border-radius: 8px; margin-bottom: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .caixa-maximizada { flex: 1; }
+    .caixa-minimizada { height: 130px; cursor: pointer; background: #f5f5f5; border: 2px dashed #ccc; }
+    svg { width: 100%; height: 100%; max-height: 100%; }
+    path { fill: #e0e0e0; stroke: #ccc; stroke-width: 0.5; }
+    path:hover { fill: #bbb !important; }
+    .com-mrv { fill: rgb(6, 94, 3) !important; cursor: pointer; }
+    .com-mrv:hover { fill: rgb(255, 153, 0) !important; }
+    .ativo { fill: rgb(255, 153, 0) !important; stroke: #000 !important; stroke-width: 1.2px !important; }
+    .info { flex: 0 0 450px; overflow-y: auto; padding-left: 15px; border-left: 1px solid #eee; }
+    .btRes { width: 100%; padding: 12px; margin-bottom: 8px; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; text-align: left; background: #fff; }
+    .btRes-ativo { border: 2px solid black !important; font-weight: bold; }
+    #residencial-info { margin-top: 20px; padding: 15px; background: #fffcf5; border-left: 4px solid orange; border-radius: 4px; }
+  </style>
 </head>
 <body>
 
-  <h1>Residenciais MRV em SP (TESTE)</h1>
+  <h1>Residenciais MRV em SP (TESTE UNIFICADO)</h1>
 
   <div class="container">
     <div class="mapa-area" id="mapa-area-container">
@@ -369,7 +390,6 @@ class="regiao"
       <div id="container-esp" class="caixa-mapa caixa-minimizada">
         <svg viewBox="0 0 450 296" xmlns="http://www.w3.org/2000/svg">
           <g transform="translate(592.4,-75.67) scale(0.2645)">
-
 <path
 d="m 952.17734,1103.3133 c -6.76641,-2.9518 -6.89946,-3.1323 -6.38728,-8.6643 0.41478,-4.48 -0.89506,-8.5609 -6.32696,-19.7122 -3.76752,-7.7344 -7.47348,-14.0625 -8.23546,-14.0625 -0.76199,0 -5.12722,2.2736 -9.70051,5.0525 l -8.31507,5.0526 -7.88488,-8.6695 c -4.33668,-4.7682 -8.56771,-8.6547 -9.40228,-8.6366 -0.83457,0.018 -5.24911,6.4842 -9.81008,14.3691 -4.56097,7.8848 -8.77688,14.3361 -9.36869,14.3361 -0.59181,0 -3.77394,-3.1996 -7.07141,-7.1102 l -5.99539,-7.1102 11.50543,-28.0702 c 6.32799,-15.4386 11.50544,-28.5987 11.50544,-29.2448 0,-0.646 -2.51904,-3.3192 -5.59788,-5.9404 l -5.59787,-4.7659 5.95628,-8.81956 c 3.27595,-4.85078 8.85934,-13.36338 12.40754,-18.9169 3.54819,-5.55351 8.22536,-11.17979 10.3937,-12.50283 4.85413,-2.96181 4.9009,-4.30021 0.3584,-10.25573 -4.15664,-5.44964 -4.38068,-8.00623 -1.43361,-16.35913 1.18273,-3.35222 2.15042,-7.47532 2.15042,-9.16245 0,-2.48688 2.91712,-4.46285 15.41135,-10.43917 8.47624,-4.05441 28.79362,-13.88263 45.14974,-21.84049 16.35611,-7.95786 30.42989,-14.46883 31.27506,-14.46883 0.84517,0 6.23757,2.17194 11.98307,4.82655 l 10.4465,4.82654 -1.8027,13.45203 c -2.7601,20.59642 -4.3652,37.20558 -3.6633,37.90752 0.3481,0.34802 5.2178,0.63276 10.8217,0.63276 h 10.1888 l 3.9084,10.50964 c 3.9706,10.67703 4.8111,15.29541 2.7838,15.29541 -0.6185,0 -2.344,2.09666 -3.8345,4.65924 -1.4904,2.56259 -3.1368,4.98181 -3.6585,5.37605 -2.1617,1.63342 -25.7892,36.40545 -25.7892,37.95325 0,0.9258 2.2579,4.8591 5.0176,8.7407 4.5148,6.3501 5.0134,7.9917 4.9754,16.3805 l -0.042,9.3231 -9.6377,10.4933 c -9.43622,10.274 -9.7275,10.458 -13.93548,8.8062 -14.8919,-5.8458 -22.93742,-8.3771 -23.6941,-7.4548 -0.47729,0.5818 -1.65543,4.606 -2.61808,8.9427 -1.62553,7.3229 -2.66261,11.5218 -7.64938,30.97 l -1.87576,7.3155 z"
 id="registro"
@@ -686,12 +706,107 @@ class="regiao"
     </div>
 
     <div class="info">
-      <h2 id="titulo-dinamico"></h2>
+      <h2 id="titulo-dinamico" style="margin-bottom:15px; color:rgb(6, 94, 3);"></h2>
       <div id="btRes-container"></div>
       <div id="residencial-info"></div>
     </div>
   </div>
 
-  <script src="script-teste.js"></script>
+  <script>
+    // SCRIPT INTEGRADO
+    const LINK_PLANILHA = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTqmzCyl1ScBsPr6d4wtq3tADya58_T9DVkhcUSDgmbwNwyZoc4tPrOMUrt8kB7UJH6tiHr_KVxfS2W/pub?output=csv";
+    let dadosGerais = [];
+    let pathSelecionado = null;
+
+    async function carregarDados() {
+        try {
+            const r = await fetch(LINK_PLANILHA);
+            const t = await r.text();
+            const linhas = t.split(/\r?\n/).filter(l => l.trim() !== "");
+            dadosGerais = linhas.slice(1).map(l => {
+                const c = l.split(/[,;]/);
+                return {
+                    id: c[0]?.toLowerCase().trim(),
+                    nome: c[2]?.trim(),
+                    est: parseInt(c[3]) || 0,
+                    end: c[4]?.trim(),
+                    bai: c[5]?.trim(),
+                    prev: c[7]?.trim(),
+                    val: c[9]?.trim()
+                };
+            }).filter(item => item.id);
+        } catch (e) { console.error("Erro planilha:", e); }
+    }
+
+    function iniciar() {
+        const container = document.getElementById("mapa-area-container");
+        const tituloSuperior = document.getElementById("nome-regiao");
+
+        // Troca de mapas clicando na caixa pequena
+        document.querySelectorAll(".caixa-mapa").forEach(caixa => {
+            caixa.onclick = function() {
+                if (this.classList.contains("caixa-minimizada")) {
+                    const atualGrande = document.querySelector(".caixa-maximizada");
+                    this.classList.replace("caixa-minimizada", "caixa-maximizada");
+                    atualGrande.classList.replace("caixa-maximizada", "caixa-minimizada");
+                    container.insertBefore(this, atualGrande);
+                    container.insertBefore(tituloSuperior, this);
+                    limparSelecao();
+                }
+            };
+        });
+
+        // Eventos nos Paths
+        document.querySelectorAll("path").forEach(p => {
+            p.onclick = function(e) {
+                if (this.closest(".caixa-minimizada")) return;
+                if (!this.classList.contains("com-mrv")) return;
+                e.stopPropagation();
+
+                if (pathSelecionado) pathSelecionado.classList.remove("ativo");
+                pathSelecionado = this;
+                this.classList.add("ativo");
+                
+                tituloSuperior.textContent = this.id.toUpperCase();
+                gerarBotoes(this.id);
+            };
+        });
+    }
+
+    function limparSelecao() {
+        document.querySelectorAll("path").forEach(p => p.classList.remove("ativo"));
+        document.getElementById("btRes-container").innerHTML = "";
+        document.getElementById("titulo-dinamico").textContent = "";
+        document.getElementById("residencial-info").innerHTML = "";
+        pathSelecionado = null;
+    }
+
+    function gerarBotoes(id) {
+        const lista = document.getElementById("btRes-container");
+        const filtrados = dadosGerais.filter(d => d.id === id);
+        lista.innerHTML = "";
+        document.getElementById("titulo-dinamico").textContent = "Residenciais em " + id.toUpperCase();
+
+        filtrados.forEach(res => {
+            const cor = (res.est > 0 && res.est <= 5) ? "red" : "black";
+            const btn = document.createElement("button");
+            btn.className = "btRes";
+            btn.innerHTML = `<strong>${res.nome}</strong> - <span style="color:${cor}">restam ${res.est} un.</span>`;
+            btn.onclick = () => {
+                document.querySelectorAll(".btRes").forEach(b => b.classList.remove("btRes-ativo"));
+                btn.classList.add("btRes-ativo");
+                document.getElementById("residencial-info").innerHTML = `
+                    <h3>${res.nome}</h3>
+                    <p>📍 ${res.end} - ${res.bai}</p>
+                    <p style="margin-top:10px">💰 Valor: <strong>${res.val}</strong></p>
+                    <p>🔑 Entrega: <strong>${res.prev}</strong></p>
+                `;
+            };
+            lista.appendChild(btn);
+        });
+    }
+
+    carregarDados().then(iniciar);
+  </script>
 </body>
 </html>
