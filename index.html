@@ -837,3 +837,189 @@ class="regiao"
   </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard MRV - ZOOM ESTADO</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; font-family: 'Segoe UI', Arial, sans-serif; overflow: hidden; background: #fff; }
+    h1 { background: rgb(6, 94, 3); color: white; text-align: center; padding: 12px; font-size: 22px; height: 55px; }
+    
+    .container { display: flex; height: calc(100% - 55px); padding: 10px; gap: 15px; }
+
+    .mapa-area { flex: 1; display: flex; flex-direction: column; height: 100%; background: white; padding: 10px; }
+    .titulo-mapa { height: 40px; font-weight: bold; text-align: center; font-size: 20px; color: rgb(6, 94, 3); margin-bottom: 5px; line-height: 40px; }
+
+    .caixa-mapa { width: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #fff; position: relative; transition: all 0.3s ease; }
+    
+    .caixa-maximizada { flex: 1; margin-bottom: 5px; border: none; }
+    .caixa-minimizada { height: 105px; cursor: pointer; border: none; opacity: 1; z-index: 10; background: #fff; }
+    
+    .caixa-minimizada:hover { background: #fff; }
+    .caixa-minimizada svg { pointer-events: none; }
+
+    svg { width: 100%; height: 100%; display: block; } 
+    
+    path { fill: #e0e0e0; stroke: #fff; stroke-width: 0.5; transition: fill 0.2s; cursor: default; }
+    path:hover { fill: #bbb !important; }
+    
+    .com-mrv { fill: rgb(6, 94, 3) !important; cursor: pointer; }
+    .com-mrv:hover { fill: rgb(255, 153, 0) !important; }
+    .ativo { fill: rgb(255, 153, 0) !important; stroke: #000 !important; stroke-width: 0.8px !important; }
+
+    .info { flex: 0 0 400px; overflow-y: auto; background: white; border-left: 1px solid #eee; padding: 15px; }
+    .btRes { width: 100%; padding: 12px; margin-bottom: 8px; border: 1px solid #eee; border-radius: 6px; cursor: pointer; text-align: left; background: #fff; transition: 0.2s; }
+    .btRes:hover { border-color: rgb(6, 94, 3); background: #f9f9f9; }
+    .btRes-ativo { border: 2px solid rgb(6, 94, 3) !important; background: #f4faf4; font-weight: bold; }
+    #residencial-info { margin-top: 15px; padding: 15px; background: #fffcf5; border-left: 4px solid orange; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+  <h1>Residenciais MRV em SP (SISTEMA UNIFICADO)</h1>
+
+  <div class="container">
+    <div class="mapa-area" id="mapa-area-container">
+      <div id="nome-regiao" class="titulo-mapa">Passe o mouse sobre uma região</div>
+
+      <div id="container-gsp" class="caixa-mapa caixa-maximizada" onclick="tentarTrocar(this)">
+        <svg viewBox="80 -10 490 310" preserveAspectRatio="xMidYMid meet">
+          <g transform="translate(110.74, 10) scale(0.2645)">
+            </g>
+        </svg>
+      </div>
+
+      <div id="container-esp" class="caixa-mapa caixa-minimizada" onclick="tentarTrocar(this)">
+        <svg viewBox="550 40 520 360" preserveAspectRatio="xMidYMid meet">
+          <g transform="translate(592.4, 0) scale(0.2645)">
+            </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="info">
+      <h2 id="titulo-dinamico" style="margin-bottom:15px; color:rgb(6,94,3); font-size: 20px;"></h2>
+      <div id="btRes-container"></div>
+      <div id="residencial-info"></div>
+    </div>
+  </div>
+
+  <script>
+    const LINK_PLANILHA = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTqmzCyl1ScBsPr6d4wtq3tADya58_T9DVkhcUSDgmbwNwyZoc4tPrOMUrt8kB7UJH6tiHr_KVxfS2W/pub?output=csv";
+    
+    const nomesCidades = {
+        "ipiranga": "Ipiranga", "guarulhos": "Guarulhos", "saojose": "São José dos Campos",
+        "campinas": "Campinas", "mogi": "Mogi das Cruzes", "sorocaba": "Sorocaba", "jundiai": "Jundiaí"
+    };
+
+    let dadosGerais = [];
+    let pathSelecionado = null;
+
+    async function carregarDados() {
+        try {
+            const r = await fetch(LINK_PLANILHA);
+            const t = await r.text();
+            const linhas = t.split(/\r?\n/).filter(l => l.trim() !== "");
+            dadosGerais = linhas.slice(1).map(l => {
+                const c = l.split(/[,;]/);
+                return {
+                    id: c[0]?.toLowerCase().trim(),
+                    nome: c[2]?.trim(),
+                    est: parseInt(c[3]) || 0,
+                    end: c[4]?.trim(),
+                    bai: c[5]?.trim(),
+                    prev: c[7]?.trim(),
+                    val: c[9]?.trim()
+                };
+            }).filter(item => item.id);
+        } catch (e) { console.error(e); }
+    }
+
+    function tentarTrocar(el) {
+        if (!el.classList.contains("caixa-minimizada")) return;
+        const container = document.getElementById("mapa-area-container");
+        const tituloSuperior = document.getElementById("nome-regiao");
+        const atualGrande = document.querySelector(".caixa-maximizada");
+        el.classList.replace("caixa-minimizada", "caixa-maximizada");
+        atualGrande.classList.replace("caixa-maximizada", "caixa-minimizada");
+        container.insertBefore(el, atualGrande);
+        container.insertBefore(tituloSuperior, el);
+        limparSelecao();
+    }
+
+    function iniciarEventos() {
+        document.querySelectorAll("path").forEach(p => {
+            p.onmouseover = function() {
+                if (this.closest(".caixa-minimizada")) return;
+                document.getElementById("nome-regiao").textContent = nomesCidades[this.id] || this.id.toUpperCase();
+            };
+            p.onmouseout = function() {
+                if (pathSelecionado) {
+                    document.getElementById("nome-regiao").textContent = nomesCidades[pathSelecionado.id] || pathSelecionado.id.toUpperCase();
+                } else {
+                    document.getElementById("nome-regiao").textContent = "Passe o mouse sobre uma região";
+                }
+            };
+            p.onclick = function(e) {
+                if (this.closest(".caixa-minimizada")) return;
+                if (!this.classList.contains("com-mrv")) return;
+                e.stopPropagation();
+                if (pathSelecionado) pathSelecionado.classList.remove("ativo");
+                pathSelecionado = this;
+                this.classList.add("ativo");
+                gerarBotoes(this.id, nomesCidades[this.id] || this.id.toUpperCase());
+            };
+        });
+    }
+
+    function limparSelecao() {
+        document.querySelectorAll("path").forEach(p => p.classList.remove("ativo"));
+        document.getElementById("btRes-container").innerHTML = "";
+        document.getElementById("titulo-dinamico").textContent = "";
+        document.getElementById("residencial-info").innerHTML = "";
+        document.getElementById("nome-regiao").textContent = "Passe o mouse sobre uma região";
+        pathSelecionado = null;
+    }
+
+    function gerarBotoes(id, nome) {
+        const lista = document.getElementById("btRes-container");
+        const filtrados = dadosGerais.filter(d => d.id === id);
+        lista.innerHTML = "";
+        document.getElementById("titulo-dinamico").textContent = "Residenciais em " + nome;
+        filtrados.forEach(res => {
+            const corEst = (res.est > 0 && res.est <= 5) ? "red" : "black";
+            const btn = document.createElement("button");
+            btn.className = "btRes";
+            btn.innerHTML = `<strong>${res.nome}</strong> - <span style="color:${corEst}">${res.est} un.</span>`;
+            btn.onclick = () => {
+                document.querySelectorAll(".btRes").forEach(b => b.classList.remove("btRes-ativo"));
+                btn.classList.add("btRes-ativo");
+                document.getElementById("residencial-info").innerHTML = `
+                    <h3 style="color:rgb(6,94,3)">${res.nome}</h3>
+                    <p style="margin:8px 0">📍 ${res.end} - ${res.bai}</p>
+                    <p>💰 Valor: <strong>${res.val}</strong></p>
+                    <p>🔑 Previsão: <strong>${res.prev}</strong></p>
+                `;
+            };
+            lista.appendChild(btn);
+        });
+    }
+
+    carregarDados().then(iniciarEventos);
+  </script>
+</body>
+</html>
+
+
