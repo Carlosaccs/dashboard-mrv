@@ -15,9 +15,10 @@
     .mapa-area { flex: 1; display: flex; flex-direction: column; height: 100%; background: white; padding: 10px; }
     .titulo-mapa { height: 40px; font-weight: bold; text-align: center; font-size: 20px; color: rgb(6, 94, 3); margin-bottom: 5px; line-height: 40px; }
 
-    .caixa-mapa { width: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #fff; position: relative; }
+    .caixa-mapa { width: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #fff; position: relative; border: 1px solid #eee; border-radius: 8px; }
     .caixa-maximizada { flex: 1; margin-bottom: 5px; }
-    .caixa-minimizada { height: 105px; cursor: pointer; opacity: 1; z-index: 10; }
+    .caixa-minimizada { height: 120px; cursor: pointer; opacity: 0.7; transition: 0.3s; }
+    .caixa-minimizada:hover { opacity: 1; background: #f9f9f9; }
     
     svg { width: 100%; height: 100%; display: block; } 
     path { fill: #e0e0e0; stroke: #fff; stroke-width: 0.5; transition: fill 0.2s; cursor: default; }
@@ -395,8 +396,7 @@ class="regiao"
 d="m 658.02878,387.7869 c -0.78849,-0.27286 -5.73906,-0.91314 -11.00128,-1.42285 l -9.56767,-0.92673 5.62523,-5.08206 c 3.09388,-2.79513 5.61448,-6.13596 5.60133,-7.42406 -0.0131,-1.2881 -2.92743,-7.16979 -6.4762,-13.07041 -3.81477,-6.3429 -6.08156,-11.61713 -5.54533,-12.90252 4.21074,-10.09361 4.33526,-21.19849 0.36939,-32.94209 -2.60534,-7.71481 -2.81579,-9.81874 -1.37947,-13.7908 0.93218,-2.57792 1.26978,-6.38086 0.75022,-8.45098 l -0.94467,-3.76384 9.13381,0.43132 c 8.8936,0.41998 9.14626,0.54049 9.60756,4.58239 0.29288,2.5662 -0.66499,5.69131 -2.50883,8.18523 -3.66288,4.95432 -3.73251,7.89657 -0.36489,15.41841 4.51108,10.07582 7.85181,11.66967 24.45968,11.66967 16.6677,0 24.18708,2.2929 29.41154,8.96852 l 3.39301,4.33547 -7.36154,7.50437 c -6.46104,6.58639 -8.22772,7.59624 -14.44243,8.25542 -7.93831,0.842 -10.31245,3.06596 -11.70874,10.96808 -0.49826,2.81984 -2.82405,7.15461 -5.16842,9.63282 -3.6277,3.8348 -4.02175,4.9557 -2.64591,7.52647 1.49528,2.79395 1.26315,3.01214 -3.09309,2.90746 -2.59033,-0.0623 -5.35481,-0.33643 -6.1433,-0.60929 z"
 id="santana"
 class="regiao"
-/>            
-          
+/>   
           
           </g>
         </svg>
@@ -405,7 +405,7 @@ class="regiao"
       <div id="container-esp" class="caixa-mapa caixa-minimizada" onclick="tentarTrocar(this)">
         <svg viewBox="540 -10 520 310" preserveAspectRatio="xMidYMid meet">
           <g transform="translate(592.4, 0) scale(0.2645)">
-            
+
 <path
 d="m 952.17734,1103.3133 c -6.76641,-2.9518 -6.89946,-3.1323 -6.38728,-8.6643 0.41478,-4.48 -0.89506,-8.5609 -6.32696,-19.7122 -3.76752,-7.7344 -7.47348,-14.0625 -8.23546,-14.0625 -0.76199,0 -5.12722,2.2736 -9.70051,5.0525 l -8.31507,5.0526 -7.88488,-8.6695 c -4.33668,-4.7682 -8.56771,-8.6547 -9.40228,-8.6366 -0.83457,0.018 -5.24911,6.4842 -9.81008,14.3691 -4.56097,7.8848 -8.77688,14.3361 -9.36869,14.3361 -0.59181,0 -3.77394,-3.1996 -7.07141,-7.1102 l -5.99539,-7.1102 11.50543,-28.0702 c 6.32799,-15.4386 11.50544,-28.5987 11.50544,-29.2448 0,-0.646 -2.51904,-3.3192 -5.59788,-5.9404 l -5.59787,-4.7659 5.95628,-8.81956 c 3.27595,-4.85078 8.85934,-13.36338 12.40754,-18.9169 3.54819,-5.55351 8.22536,-11.17979 10.3937,-12.50283 4.85413,-2.96181 4.9009,-4.30021 0.3584,-10.25573 -4.15664,-5.44964 -4.38068,-8.00623 -1.43361,-16.35913 1.18273,-3.35222 2.15042,-7.47532 2.15042,-9.16245 0,-2.48688 2.91712,-4.46285 15.41135,-10.43917 8.47624,-4.05441 28.79362,-13.88263 45.14974,-21.84049 16.35611,-7.95786 30.42989,-14.46883 31.27506,-14.46883 0.84517,0 6.23757,2.17194 11.98307,4.82655 l 10.4465,4.82654 -1.8027,13.45203 c -2.7601,20.59642 -4.3652,37.20558 -3.6633,37.90752 0.3481,0.34802 5.2178,0.63276 10.8217,0.63276 h 10.1888 l 3.9084,10.50964 c 3.9706,10.67703 4.8111,15.29541 2.7838,15.29541 -0.6185,0 -2.344,2.09666 -3.8345,4.65924 -1.4904,2.56259 -3.1368,4.98181 -3.6585,5.37605 -2.1617,1.63342 -25.7892,36.40545 -25.7892,37.95325 0,0.9258 2.2579,4.8591 5.0176,8.7407 4.5148,6.3501 5.0134,7.9917 4.9754,16.3805 l -0.042,9.3231 -9.6377,10.4933 c -9.43622,10.274 -9.7275,10.458 -13.93548,8.8062 -14.8919,-5.8458 -22.93742,-8.3771 -23.6941,-7.4548 -0.47729,0.5818 -1.65543,4.606 -2.61808,8.9427 -1.62553,7.3229 -2.66261,11.5218 -7.64938,30.97 l -1.87576,7.3155 z"
 id="registro"
@@ -715,7 +715,8 @@ class="regiao"
 d="m 963.38854,234.45791 c -1.57697,-0.97291 -9.47977,-5.83907 -17.56177,-10.81368 l -14.69454,-9.04477 v -8.11638 c 0,-8.72386 -0.11793,-8.85358 -15.05295,-16.55911 -2.46737,-1.27301 -2.92607,-3.17175 -3.2892,-13.61515 -0.37688,-10.83891 -0.82343,-12.55488 -4.17848,-16.05679 l -3.75649,-3.92094 4.12567,-3.25922 c 2.26912,-1.79257 8.98788,-6.73779 14.93058,-10.98938 5.94269,-4.25159 11.43502,-8.76747 12.20516,-10.0353 3.81658,-6.28294 15.13405,-31.89075 14.52778,-32.871719 -0.38192,-0.61797 -12.02477,-6.850535 -25.87299,-13.850142 -13.84822,-6.999607 -25.17814,-13.094407 -25.17758,-13.544 5.5e-4,-0.449593 7.35792,-3.813118 16.34972,-7.474499 l 16.34872,-6.657058 12.9594,9.165883 c 7.12766,5.041234 13.67149,9.165882 14.54184,9.165882 0.87034,0 5.11218,-2.257942 9.42629,-5.017649 4.31412,-2.759707 8.10236,-5.017649 8.41832,-5.017649 0.31596,0 7.07159,-3.930288 15.01252,-8.733973 14.16096,-8.566337 14.70656,-8.757969 28.42836,-9.984155 7.6947,-0.687599 19.6352,-1.273194 26.5345,-1.301323 l 12.5441,-0.05114 -0.022,11.110508 c -0.019,9.804396 -1.6744,18.124316 -4.4925,22.579419 -1.091,1.724697 -19.8574,47.610915 -19.8574,48.553765 0,0.36318 2.5633,3.45737 5.6962,6.87598 3.1328,3.41861 5.7133,6.55335 5.7344,6.96609 0.021,0.41274 -5.1227,5.88118 -11.4306,12.15208 -6.3079,6.27091 -11.4689,12.10685 -11.4689,12.96877 0,1.59801 0.9367,2.49055 13.8956,13.24098 l 7.4003,6.13914 -2.8243,10.34742 c -1.5533,5.69107 -3.1628,11.47638 -3.5765,12.85623 -0.6286,2.09686 -2.5018,2.50883 -11.4076,2.50883 h -10.6555 v 5.73445 5.73446 h -21.24026 -21.24022 l -3.1989,5.69168 c -3.92607,6.98549 -4.48605,7.34046 -8.08118,5.12246 z"
 id="saojoaquimdabarra"
 class="regiao"
-/>         
+/> 
+          
           </g>
         </svg>
       </div>
@@ -745,82 +746,81 @@ class="regiao"
 
   <script>
     const LINK_PLANILHA = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTqmzCyl1ScBsPr6d4wtq3tADya58_T9DVkhcUSDgmbwNwyZoc4tPrOMUrt8kB7UJH6tiHr_KVxfS2W/pub?output=csv";
-    
-    const nomesCidades = {
-        "juquitiba": "Juquitiba", "saobernardo": "São Bernardo do Campo", "diadema": "Diadema", 
-        "santoandre": "Santo André", "guarulhos": "Guarulhos", "osasco": "Osasco", "ipiranga": "Ipiranga",
-        "registro": "Registro", "campinas": "Campinas", "ribeiraopreto": "Ribeirão Preto"
-    };
+    const nomesCidades = { "ipiranga": "Ipiranga", "registro": "Registro" };
 
     let dadosGerais = [];
     let pathSelecionado = null;
 
-    // Função de limpeza robusta para remover as aspas e espaços extras
-    function limpar(texto) {
-        if (!texto) return "";
-        return texto.toString().replace(/^"|"$/g, '').trim();
+    function limparCampo(txt) {
+      if (!txt) return "";
+      return txt.toString().replace(/["']/g, "").trim();
     }
 
     async function carregarDados() {
-        try {
-            const r = await fetch(LINK_PLANILHA + "&cache=" + new Date().getTime()); // Evita cache do fetch
-            const t = await r.text();
-            const linhas = t.split(/\r?\n/).filter(l => l.trim() !== "");
-            
-            dadosGerais = linhas.slice(1).map(l => {
-                const c = l.split(/[,;]/);
-                return {
-                    id: limpar(c[0]).toLowerCase(),
-                    nome: limpar(c[2]),
-                    est: parseInt(limpar(c[3])) || 0,
-                    end: limpar(c[4]),
-                    bai: limpar(c[5]),
-                    prev: limpar(c[7]), // Coluna H
-                    val: limpar(c[9])   // Coluna J
-                };
-            }).filter(item => item.id);
-            console.log("Dados carregados com sucesso!");
-        } catch (e) { console.error("Erro planilha:", e); }
+      try {
+        const response = await fetch(LINK_PLANILHA + "&cache=" + Date.now());
+        const text = await response.text();
+        const linhas = text.split(/\r?\n/).filter(l => l.trim() !== "");
+        
+        dadosGerais = linhas.slice(1).map(l => {
+          const c = l.split(/[,;]/);
+          return {
+            id: limparCampo(c[0]).toLowerCase(),
+            nome: limparCampo(c[2]),
+            est: parseInt(limparCampo(c[3])) || 0,
+            end: limparCampo(c[4]),
+            bai: limparCampo(c[5]),
+            prev: limparCampo(c[7]), 
+            val: limparCampo(c[9])
+          };
+        }).filter(item => item.id);
+      } catch (e) { console.error("Erro no carregamento:", e); }
     }
 
+    // Função para alternar os mapas (Maximização)
     function tentarTrocar(el) {
-        if (!el.classList.contains("caixa-minimizada")) return;
-        const container = document.getElementById("mapa-area-container");
-        const tituloSuperior = document.getElementById("nome-regiao");
-        const atualGrande = document.querySelector(".caixa-maximizada");
-        el.classList.replace("caixa-minimizada", "caixa-maximizada");
-        atualGrande.classList.replace("caixa-maximizada", "caixa-minimizada");
-        container.insertBefore(el, atualGrande);
-        container.insertBefore(tituloSuperior, el);
-        limparSelecao();
+      if (!el.classList.contains("caixa-minimizada")) return;
+      
+      const containerArea = document.getElementById("mapa-area-container");
+      const tituloSuperior = document.getElementById("nome-regiao");
+      const atualGrande = document.querySelector(".caixa-maximizada");
+      
+      // Inverte as classes
+      el.classList.replace("caixa-minimizada", "caixa-maximizada");
+      atualGrande.classList.replace("caixa-maximizada", "caixa-minimizada");
+      
+      // Move o elemento clicado para o topo da lista visual
+      containerArea.insertBefore(el, atualGrande);
+      containerArea.insertBefore(tituloSuperior, el);
+      
+      limparSelecao();
     }
 
     function iniciarEventos() {
-        document.querySelectorAll("path").forEach(p => {
-            p.onmouseover = function() {
-                if (this.closest(".caixa-minimizada")) return;
-                document.getElementById("nome-regiao").textContent = nomesCidades[this.id] || this.id.toUpperCase();
-            };
-            p.onmouseout = function() {
-                document.getElementById("nome-regiao").textContent = pathSelecionado ? (nomesCidades[pathSelecionado.id] || pathSelecionado.id.toUpperCase()) : "Passe o mouse sobre uma região";
-            };
-            p.onclick = function(e) {
-                if (this.closest(".caixa-minimizada") || !this.classList.contains("com-mrv")) return;
-                e.stopPropagation();
-                if (pathSelecionado) pathSelecionado.classList.remove("ativo");
-                pathSelecionado = this;
-                this.classList.add("ativo");
-                gerarBotoes(this.id, nomesCidades[this.id] || this.id.toUpperCase());
-            };
-        });
+      document.querySelectorAll("path").forEach(p => {
+        p.onmouseover = function() {
+          if (this.closest(".caixa-minimizada")) return;
+          document.getElementById("nome-regiao").textContent = nomesCidades[this.id] || this.id.toUpperCase();
+        };
+
+        p.onclick = function(e) {
+          if (this.closest(".caixa-minimizada") || !this.classList.contains("com-mrv")) return;
+          e.stopPropagation(); // Impede que o clique no path ative a troca de mapa
+
+          if (pathSelecionado) pathSelecionado.classList.remove("ativo");
+          pathSelecionado = this;
+          this.classList.add("ativo");
+          gerarBotoes(this.id, nomesCidades[this.id] || this.id.toUpperCase());
+        };
+      });
     }
 
     function limparSelecao() {
-        document.querySelectorAll("path").forEach(p => p.classList.remove("ativo"));
-        document.getElementById("btRes-container").innerHTML = "";
-        document.getElementById("titulo-dinamico").textContent = "";
-        document.getElementById("residencial-info").style.display = "none";
-        pathSelecionado = null;
+      document.querySelectorAll("path").forEach(p => p.classList.remove("ativo"));
+      document.getElementById("btRes-container").innerHTML = "";
+      document.getElementById("titulo-dinamico").textContent = "";
+      document.getElementById("residencial-info").style.display = "none";
+      pathSelecionado = null;
     }
 
     function gerarBotoes(id, nome) {
@@ -843,7 +843,7 @@ class="regiao"
           document.getElementById("residencial-info").style.display = "block";
           document.getElementById("info-nome-res").innerText = res.nome;
           
-          // JUNÇÃO CORRIGIDA: ENDEREÇO + BAIRRO
+          // JUNÇÃO DE ENDEREÇO E BAIRRO
           document.getElementById("info-endereco").innerText = res.end + " - " + res.bai;
           
           document.getElementById("info-valor").innerText = res.val || "Consulte";
