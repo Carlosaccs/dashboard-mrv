@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -9,16 +11,49 @@
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         html, body { height: 100%; font-family: 'Segoe UI', Arial, sans-serif; background: #ffffff; color: #333; }
         
-        h1 { background: rgb(6, 94, 3); color: white; text-align: center; padding: 10px; font-size: 18px; height: 50px; display: flex; align-items: center; justify-content: center; }
-        
+        /* Header com Título Centralizado e Botão à Direita */
+        header { 
+            background: rgb(6, 94, 3); 
+            color: white; 
+            display: grid;
+            grid-template-columns: 80px 1fr 80px; /* Cria colunas para centralizar o meio */
+            align-items: center; 
+            padding: 0 15px; 
+            height: 50px; 
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        header h1 { 
+            grid-column: 2; 
+            text-align: center; 
+            font-size: 18px; 
+            font-weight: bold; 
+        }
+        .btn-sobre { 
+            grid-column: 3;
+            justify-self: end;
+            background: rgba(255,255,255,0.2); 
+            border: 1px solid white; 
+            color: white; 
+            padding: 5px 10px; 
+            border-radius: 20px; 
+            font-size: 11px; 
+            cursor: pointer; 
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
         .container { display: flex; flex-direction: column; padding: 5px; gap: 5px; }
-        
         .mapa-area { width: 100%; display: flex; flex-direction: column; order: 1; overflow: hidden; }
         .info { width: 100%; order: 2; padding: 10px; }
 
-        /* Ajustes Mobile: Máxima Aproximação e Zoom */
+        /* Ajustes Mobile */
         @media (max-width: 899px) {
             .container { padding: 0; gap: 0; }
+            header { grid-template-columns: 50px 1fr 50px; padding: 0 10px; }
+            header h1 { font-size: 16px; }
+            .btn-sobre { font-size: 10px; padding: 4px 8px; }
             .titulo-mapa { margin-top: 5px; margin-bottom: 0 !important; font-size: 16px; }
             .caixa-maximizada { 
                 transform: scale(1.25); 
@@ -37,17 +72,13 @@
         }
 
         .titulo-mapa { min-height: 35px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; color: #333; text-align: center; z-index: 20; position: relative; }
-        
         .caixa-mapa { background: transparent; display: flex; align-items: center; justify-content: center; position: relative; width: 100%; border: none; }
         .caixa-maximizada { flex: 1; min-height: 320px; z-index: 1; }
-        
         .caixa-minimizada { height: 90px; cursor: pointer; opacity: 0.4; filter: grayscale(1); overflow: hidden; z-index: 10; margin-top: 5px; }
         
         svg { width: 100%; height: 100%; max-height: 65vh; display: block; }
-        
         path { fill: #888888; stroke: #ffffff; stroke-width: 0.6; transition: fill 0.1s; cursor: default; outline: none; }
         
-        /* Hover Visual apenas em Desktop */
         @media (min-width: 900px) {
             path:hover { fill: #555555; stroke: #000; }
             .com-mrv:hover { fill: rgb(255, 153, 0) !important; }
@@ -56,25 +87,58 @@
         .com-mrv { fill: rgb(6, 94, 3) !important; cursor: pointer; }
         .ativo { fill: rgb(255, 153, 0) !important; stroke: #000 !important; stroke-width: 1.5px !important; }
 
+        /* --- MODAL (CAIXA SOBRE) --- */
+        .modal-overlay { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.6); display: none; align-items: center; 
+            justify-content: center; z-index: 200; padding: 20px;
+        }
+        .modal-box { 
+            background: white; padding: 30px 25px 25px 25px; border-radius: 12px; 
+            max-width: 500px; width: 100%; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
+        }
+        .modal-box p { font-size: 15px; line-height: 1.6; color: #444; margin-bottom: 15px; }
+        .modal-box .contato-link { 
+            display: inline-block; background: #25d366; color: white; 
+            text-decoration: none; padding: 12px 15px; border-radius: 8px; 
+            font-weight: bold; margin-top: 10px; width: 100%; text-align: center;
+        }
+        .btn-fechar-modal { 
+            position: absolute; top: 5px; right: 12px; font-size: 28px; 
+            cursor: pointer; color: #888; border: none; background: none; 
+        }
+
         /* --- INTERFACE DE INFO --- */
         #titulo-dinamico { margin-bottom: 12px; color: rgb(6, 94, 3); font-size: 20px; }
         .btRes { width: 100%; padding: 15px; border: 1px solid #eee; border-radius: 8px; cursor: pointer; text-align: left; background: #fafafa; margin-bottom: 8px; font-size: 14px; }
         .btRes-ativo { border-color: rgb(255, 153, 0); background: #fff !important; font-weight: bold; border-width: 2px; }
-        
         #dica-corretor-box { background: #f0fdf4; border-radius: 8px; padding: 12px; margin-top: 10px; border-left: 5px solid rgb(6, 94, 3); display: none; font-size: 14px; margin-bottom: 15px; }
         #residencial-info { margin-top: 15px; padding: 15px; background: #fffcf5; border: 1px solid #ffeeba; border-left: 5px solid rgb(255, 153, 0); border-radius: 8px; display: none; margin-bottom: 30px; }
-        
         .grid-tecnico { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
         .label { font-weight: bold; color: #333; font-size: 13px; }
         .detalhes-texto p { margin-bottom: 8px; font-size: 14px; line-height: 1.4; }
-        
         .btn-acao { display: block; width: 100%; margin-top: 10px; padding: 15px; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; text-align: center; font-size: 14px; text-decoration: none; }
         .btn-book { background: #16a34a; } .btn-video { background: #2563eb; }
     </style>
 </head>
 <body>
 
-    <h1>Residenciais MRV em SP</h1>
+    <header>
+        <h1>Residenciais MRV em SP</h1>
+        <button class="btn-sobre" onclick="toggleModal(true)">Sobre</button>
+    </header>
+
+    <div id="modalSobre" class="modal-overlay">
+        <div class="modal-box">
+            <button class="btn-fechar-modal" onclick="toggleModal(false)">&times;</button>
+            <p>Este dashboard foi desenvolvido para agilizar o acesso a informações básicas sobre os residenciais MRV de SP, auxiliando no atendimento rápido aos leads.</p>
+            <p>As informações mostradas podem estar desatualizadas ou apresentar divergências. Conto com sua ajuda para apontar erros e colaborar com críticas ou sugestões e enviar materiais como books e vídeos que estejam faltando para melhorar a ferramenta.</p>
+            
+            <a href="https://wa.me/5511992617026?text=Olá Carlos, tenho uma sugestão/correção para o Dashboard MRV" target="_blank" class="contato-link">
+                Carlos Custódio - (11) 99261-7026
+            </a>
+        </div>
+    </div>
 
     <div class="container">
         <div class="mapa-area" id="mapa-area-container">
@@ -385,7 +449,7 @@ class="regiao"
 />
 <path
 d="m 815.82248,392.91648 c -2.14954,-2.37522 -4.44907,-2.98387 -11.42887,-3.02506 -7.07069,-0.0417 -9.54781,-0.71345 -12.98271,-3.52059 -2.33465,-1.90797 -3.94747,-3.678 -3.58404,-3.93339 2.78363,-1.95618 12.17015,-5.36082 18.98316,-6.88551 4.6638,-1.04371 8.19948,-2.61331 8.19948,-3.64 0,-0.99277 0.37258,-2.77595 0.82795,-3.96263 0.51009,-1.32928 -0.94796,-3.71338 -3.79793,-6.21011 -2.54424,-2.22889 -5.85021,-5.3357 -7.34662,-6.90402 -2.68594,-2.81504 -2.6628,-2.86652 1.81009,-4.02556 4.13183,-1.07066 4.45361,-1.56015 3.65398,-5.55832 -0.80908,-4.04536 -0.62771,-4.30251 2.34624,-3.32663 5.97218,1.95971 15.083,2.41793 17.91719,0.90112 5.13003,-2.74551 12.68872,7.50147 8.90049,12.06601 -0.9747,1.17445 -1.37231,3.87637 -0.91034,6.1862 0.65496,3.27483 -0.0311,4.91662 -3.40555,8.14954 -4.78289,4.5823 -5.02264,6.19793 -2.11666,14.26419 2.92717,8.12512 2.74879,8.83637 -2.46749,9.83803 -2.56258,0.49208 -6.29008,1.26943 -8.28332,1.72746 -2.58213,0.59334 -4.39775,-0.0221 -6.31505,-2.14073 z"
-id="ermelimdomatarazzo"
+id="ermelinomatarazzo"
 class="regiao com-mrv"
 />
 <path
@@ -789,7 +853,7 @@ class="regiao"
             "butanta": "Butanta", "mooca": "Mooca", "sé": "Sé", "vilaprudente": "Vila Prudente",
             "aricanduva": "Aricanduva", "saomateus": "São Mateus", "itaquera": "Itaquera",
             "guaianases": "Guaianases", "cidadetiradentes": "Cidade Tiradentes", "saomiguel": "São Miguel",
-            "itaim": "Itaim", "penha": "Penha", "ermelimdomatarazzo": "Ermelimdo Matarazzo",
+            "itaim": "Itaim", "penha": "Penha", "ermelinomatarazzo": "Ermelino Matarazzo",
             "tremembe": "Tremembe", "vilamaria": "Vila Maria", "anhanguera": "Anhanguera",
             "pirituba": "Pirituba", "casaverde": "Casa Verde", "freguesiadoo": "Freguesia do Ó",
             "santana": "Santana", "itaquaquecetuba": "Itaquaquecetuba", "miracatu": "Miracatu",
@@ -808,12 +872,16 @@ class="regiao"
             "lins": "Lins", "penapolis": "Penapolis", "marilia": "Marilia", "tupa": "Tupã",
             "jau": "Jau", "piracicaba": "Piracicaba", "campinas": "Campinas", "sumare": "Sumare",
             "americana": "Americana", "mogimirim": "Mogi Mirim", "limeira": "Limeira",
-            "saocarlos": "São Carlos", "pirassununga": "Pirassununga", "saojojoaodaboavista": "São João da Boa Vista",
+            "saocarlos": "São Carlos", "pirassununga": "Pirassununga", "saojoaodaboavista": "São João da Boa Vista",
             "ribeiraopreto": "Ribeirao Preto", "araraquara": "Araraquara", "jaboticabal": "Jaboticabal",
             "taquaritinga": "Taquaritinga", "catanduva": "Catanduva", "franca": "Franca",
             "sertaozinho": "Sertãozinho", "saojoaquimdabarra": "São Joaquim da Barra", "barretos": "Barretos",
             "bauru": "Bauru"
         };
+
+        function toggleModal(show) {
+            document.getElementById("modalSobre").style.display = show ? 'flex' : 'none';
+        }
 
         function obterNomeFormatado(idPath) {
             if (!idPath) return "Toque em uma região";
@@ -944,7 +1012,6 @@ class="regiao"
             const display = document.getElementById("nome-regiao");
             
             document.querySelectorAll("path").forEach(p => {
-                // Evento de Clique/Toque Principal
                 p.onclick = (e) => {
                     if (p.closest(".caixa-minimizada")) return;
 
@@ -954,7 +1021,6 @@ class="regiao"
                         return;
                     }
 
-                    // Se for cinza (sem MRV), apenas mostra o nome e reseta seleção anterior
                     if (!p.classList.contains("com-mrv")) {
                         e.stopPropagation();
                         display.textContent = obterNomeFormatado(p.id);
@@ -979,14 +1045,12 @@ class="regiao"
                     }
                 };
                 
-                // CORREÇÃO: Touchstart para atualizar o nome no celular sem precisar de Hover CSS
                 p.ontouchstart = (e) => {
                     if (!p.closest(".caixa-minimizada")) {
                         display.textContent = obterNomeFormatado(p.id);
                     }
                 };
 
-                // Mouseenter para Desktop
                 p.onmouseenter = () => {
                     if (window.innerWidth >= 900 && !p.closest(".caixa-minimizada")) {
                         display.textContent = obterNomeFormatado(p.id);
