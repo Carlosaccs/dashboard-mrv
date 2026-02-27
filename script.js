@@ -310,7 +310,7 @@ function configurarEventos() {
             // 1. Bloqueia cliques em mapas minimizados
             if (p.closest(".caixa-minimizada")) return;
 
-            // 2. Lógica especial para o botão "Grande São Paulo"
+            // 2. Lógica para o botão "Grande São Paulo"
             const idNormalizado = p.id.toLowerCase().replace(/[\s-_]/g, '');
             if (idNormalizado === "grandesaopaulo") {
                 e.stopPropagation();
@@ -320,29 +320,29 @@ function configurarEventos() {
 
             e.stopPropagation();
 
-            // 3. Atualiza SEMPRE o nome da região no texto acima, seja cinza ou verde
+            // 3. ATUALIZA O TEXTO (Para qualquer path, cinza ou verde)
             display.textContent = obterNomeFormatado(p.id);
 
-            // 4. TRAVA DE DADOS: Se NÃO for verde (commrv), para aqui (não seleciona nem busca residenciais)
-            if (!p.classList.contains("commrv")) {
-                if (pathSelecionado) pathSelecionado.classList.remove("ativo");
-                pathSelecionado = null;
-                resetInterface(); // Limpa a lista de botões da direita
-                return; 
-            }
-
-            // 5. Lógica de seleção APENAS para cidades com MRV (verde)
-            if (pathSelecionado === p) {
-                p.classList.remove("ativo");
-                pathSelecionado = null;
-                display.textContent = "Toque em uma região";
-                resetInterface();
+            // 4. SELEÇÃO VISUAL E DADOS (Apenas para paths verdes)
+            if (p.classList.contains("commrv")) {
+                if (pathSelecionado === p) {
+                    // Desmaca se clicar no mesmo
+                    p.classList.remove("ativo");
+                    pathSelecionado = null;
+                    display.textContent = "Toque em uma região";
+                    resetInterface();
+                } else {
+                    // Marca o novo e carrega botões
+                    if (pathSelecionado) pathSelecionado.classList.remove("ativo");
+                    pathSelecionado = p;
+                    p.classList.add("ativo");
+                    gerarBotoes(p.id);
+                }
             } else {
+                // Se clicou no CINZA: desmarca o anterior e limpa a lista, mas mantém o nome no display
                 if (pathSelecionado) pathSelecionado.classList.remove("ativo");
-                pathSelecionado = p;
-                p.classList.add("ativo");
-                // Já atualizamos o display.textContent no passo 3
-                gerarBotoes(p.id);
+                pathSelecionado = null;
+                resetInterface();
             }
         };
     });
