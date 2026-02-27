@@ -4,141 +4,8 @@ const LINK_PLANILHA = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTqmzCyl1
 let dadosGerais = [];
 let pathSelecionado = null;
 
-// BIBLIOTECA EM ORDEM ALFABÉTICA
 const DICIONARIO_NOMES = {
-    "adamantina": "Adamantina",
-    "americana": "Americana",
-    "andradina": "Andradina",
-    "anhanguera": "Anhanguera",
-    "apiai": "Apiaí",
-    "aracatuba": "Araçatuba",
-    "araraquara": "Araraquara",
-    "aricanduva": "Aricanduva",
-    "aruja": "Arujá",
-    "assis": "Assis",
-    "avare": "Avaré",
-    "barretos": "Barretos",
-    "barueri": "Barueri",
-    "bauru": "Bauru",
-    "birigui": "Birigui",
-    "biritibamirim": "Biritiba Mirim",
-    "botucatu": "Botucatu",
-    "bragancapaulista": "Bragança Paulista",
-    "butanta": "Butantã",
-    "caieiras": "Caieiras",
-    "cajamar": "Cajamar",
-    "campinas": "Campinas",
-    "campolimpo": "Campo Limpo",
-    "capivari": "Capivari",
-    "caraguatatuba": "Caraguatatuba",
-    "carapicuiba": "Carapicuíba",
-    "casaverde": "Casa Verde",
-    "catanduva": "Catanduva",
-    "cidadeademar": "Cidade Ademar",
-    "cidadetiradentes": "Cidade Tiradentes",
-    "cotia": "Cotia",
-    "diadema": "Diadema",
-    "embudasartes": "Embu das Artes",
-    "embuguacu": "Embu-Guaçu",
-    "ermelinomatarazzo": "Ermelino Matarazzo",
-    "fernandopolis": "Fernandópolis",
-    "ferrazdevasconcelos": "Ferraz de Vasconcelos",
-    "franca": "Franca",
-    "franciscomorato": "Francisco Morato",
-    "francodarocha": "Franco da Rocha",
-    "freguesiadoo": "Freguesia do Ó",
-    "grandesaopaulo": "Grande São Paulo",
-    "guaianases": "Guaianases",
-    "guararema": "Guararema",
-    "guaratinqueta": "Guaratinguetá",
-    "guarulhos": "Guarulhos",
-    "interlagos": "Interlagos",
-    "ipaussu": "Ipaussu",
-    "ipiranga": "Ipiranga",
-    "itaim": "Itaim",
-    "itapecericadaserra": "Itapecerica da Serra",
-    "itapetininga": "Itapetininga",
-    "itapeva": "Itapeva",
-    "itapevi": "Itapevi",
-    "itaquaquecetuba": "Itaquaquecetuba",
-    "itaquera": "Itaquera",
-    "itarare": "Itararé",
-    "itu": "Itu",
-    "jabaquara": "Jabaquara",
-    "jaboticabal": "Jaboticabal",
-    "jacarei": "Jacareí",
-    "jales": "Jales",
-    "jandira": "Jandira",
-    "jau": "Jaú",
-    "josebonifacio": "José Bonifácio",
-    "jundiai": "Jundiaí",
-    "juquitiba": "Juquitiba",
-    "lapa": "Lapa",
-    "limeira": "Limeira",
-    "lins": "Lins",
-    "mairipora": "Mairiporã",
-    "marilia": "Marília",
-    "maua": "Mauá",
-    "mboimirim": "M'Boi Mirim",
-    "miracatu": "Miracatu",
-    "mirantedoparanapanema": "Mirante do Paranapanema",
-    "mogidascruzes": "Mogi das Cruzes",
-    "mogimirim": "Mogi Mirim",
-    "mooca": "Mooca",
-    "osasco": "Osasco",
-    "ourinhos": "Ourinhos",
-    "parelheiros": "Parelheiros",
-    "penapolis": "Penápolis",
-    "penha": "Penha",
-    "pindamonhangaba": "Pindamonhangaba",
-    "pinheiros": "Pinheiros",
-    "piracicaba": "Piracicaba",
-    "piraju": "Piraju",
-    "piraporadobomjesus": "Pirapora do Bom Jesus",
-    "pirassununga": "Pirassununga",
-    "pirituba": "Pirituba",
-    "poa": "Poá",
-    "presidenteprudente": "Presidente Prudente",
-    "registro": "Registro",
-    "ribeiraopires": "Ribeirão Pires",
-    "ribeiraopreto": "Ribeirão Preto",
-    "riograndedaserra": "Rio Grande da Serra",
-    "salesopolis": "Salesópolis",
-    "santaisabel": "Santa Isabel",
-    "santana": "Santana",
-    "santanadeparnaiba": "Santana de Parnaíba",
-    "santoamaro": "Santo Amaro",
-    "santoanastacio": "Santo Anastácio",
-    "santoandre": "Santo André",
-    "santos": "Santos",
-    "saobernardo": "São Bernardo do Campo",
-    "saocaetano": "São Caetano do Sul",
-    "saocarlos": "São Carlos",
-    "saojoaquimdabarra": "São Joaquim da Barra",
-    "saojoaodaboavista": "São João da Boa Vista",
-    "saojosedoriopreto": "São José do Rio Preto",
-    "saojosedoscampos": "São José dos Campos",
-    "saolourenco": "São Lourenço da Serra",
-    "saomateus": "São Mateus",
-    "saomiguel": "São Miguel",
-    "saoroque": "São Roque",
-    "saovicente": "São Vicente",
-    "se": "Sé",
-    "sertaozinho": "Sertãozinho",
-    "sorocaba": "Sorocaba",
-    "sumare": "Sumaré",
-    "suzano": "Suzano",
-    "taboaodaserra": "Taboão da Serra",
-    "taquaritinga": "Taquaritinga",
-    "taubate": "Taubaté",
-    "tremembe": "Tremembé",
-    "tupa": "Tupã",
-    "vargemgrande": "Vargem Grande Paulista",
-    "vilamaria": "Vila Maria",
-    "vilamariana": "Vila Mariana",
-    "vilaprudente": "Vila Prudente",
-    "votorantim": "Votorantim",
-    "votuporanga": "Votuporanga"
+    "adamantina": "Adamantina", "americana": "Americana", "andradina": "Andradina", "anhanguera": "Anhanguera", "apiai": "Apiaí", "aracatuba": "Araçatuba", "araraquara": "Araraquara", "aricanduva": "Aricanduva", "aruja": "Arujá", "assis": "Assis", "avare": "Avaré", "barretos": "Barretos", "barueri": "Barueri", "bauru": "Bauru", "birigui": "Birigui", "biritibamirim": "Biritiba Mirim", "botucatu": "Botucatu", "bragancapaulista": "Bragança Paulista", "butanta": "Butantã", "caieiras": "Caieiras", "cajamar": "Cajamar", "campinas": "Campinas", "campolimpo": "Campo Limpo", "capivari": "Capivari", "caraguatatuba": "Caraguatatuba", "carapicuiba": "Carapicuíba", "casaverde": "Casa Verde", "catanduva": "Catanduva", "cidadeademar": "Cidade Ademar", "cidadetiradentes": "Cidade Tiradentes", "cotia": "Cotia", "diadema": "Diadema", "embudasartes": "Embu das Artes", "embuguacu": "Embu-Guaçu", "ermelinomatarazzo": "Ermelino Matarazzo", "fernandopolis": "Fernandópolis", "ferrazdevasconcelos": "Ferraz de Vasconcelos", "franca": "Franca", "franciscomorato": "Francisco Morato", "francodarocha": "Franco da Rocha", "freguesiadoo": "Freguesia do Ó", "grandesaopaulo": "Grande São Paulo", "guaianases": "Guaianases", "guararema": "Guararema", "guaratinqueta": "Guaratinguetá", "guarulhos": "Guarulhos", "interlagos": "Interlagos", "ipaussu": "Ipaussu", "ipiranga": "Ipiranga", "itaim": "Itaim", "itapecericadaserra": "Itapecerica da Serra", "itapetininga": "Itapetininga", "itapeva": "Itapeva", "itapevi": "Itapevi", "itaquaquecetuba": "Itaquaquecetuba", "itaquera": "Itaquera", "itarare": "Itararé", "itu": "Itu", "jabaquara": "Jabaquara", "jaboticabal": "Jaboticabal", "jacarei": "Jacareí", "jales": "Jales", "jandira": "Jandira", "jau": "Jaú", "josebonifacio": "José Bonifácio", "jundiai": "Jundiaí", "juquitiba": "Juquitiba", "lapa": "Lapa", "limeira": "Limeira", "lins": "Lins", "mairipora": "Mairiporã", "marilia": "Marília", "maua": "Mauá", "mboimirim": "M'Boi Mirim", "miracatu": "Miracatu", "mirantedoparanapanema": "Mirante do Paranapanema", "mogidascruzes": "Mogi das Cruzes", "mogimirim": "Mogi Mirim", "mooca": "Mooca", "osasco": "Osasco", "ourinhos": "Ourinhos", "parelheiros": "Parelheiros", "penapolis": "Penápolis", "penha": "Penha", "pindamonhangaba": "Pindamonhangaba", "pinheiros": "Pinheiros", "piracicaba": "Piracicaba", "piraju": "Piraju", "piraporadobomjesus": "Pirapora do Bom Jesus", "pirassununga": "Pirassununga", "pirituba": "Pirituba", "poa": "Poá", "presidenteprudente": "Presidente Prudente", "registro": "Registro", "ribeiraopires": "Ribeirão Pires", "ribeiraopreto": "Ribeirão Preto", "riograndedaserra": "Rio Grande da Serra", "salesopolis": "Salesópolis", "santaisabel": "Santa Isabel", "santana": "Santana", "santanadeparnaiba": "Santana de Parnaíba", "santoamaro": "Santo Amaro", "santoanastacio": "Santo Anastácio", "santoandre": "Santo André", "santos": "Santos", "saobernardo": "São Bernardo do Campo", "saocaetano": "São Caetano do Sul", "saocarlos": "São Carlos", "saojoaquimdabarra": "São Joaquim da Barra", "saojoaodaboavista": "São João da Boa Vista", "saojosedoriopreto": "São José do Rio Preto", "saojosedoscampos": "São José dos Campos", "saolourenco": "São Lourenço da Serra", "saomateus": "São Mateus", "saomiguel": "São Miguel", "saoroque": "São Roque", "saovicente": "São Vicente", "se": "Sé", "sertaozinho": "Sertãozinho", "sorocaba": "Sorocaba", "sumare": "Sumaré", "suzano": "Suzano", "taboaodaserra": "Taboão da Serra", "taquaritinga": "Taquaritinga", "taubate": "Taubaté", "tremembe": "Tremembé", "tupa": "Tupã", "vargemgrande": "Vargem Grande Paulista", "vilamaria": "Vila Maria", "vilamariana": "Vila Mariana", "vilaprudente": "Vila Prudente", "votorantim": "Votorantim", "votuporanga": "Votuporanga"
 };
 
 /* --- FUNÇÕES AUXILIARES --- */
@@ -155,7 +22,7 @@ function obterNomeFormatado(idPath) {
 }
 
 function formatarLinkSeguro(url) {
-    if (!url || typeof url !== 'string' || url.trim() === "") return "";
+    if (!url || typeof url !== 'string' || url.trim() === "" || url === "-") return "";
     const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
     return match ? `https://drive.google.com/file/d/${match[1]}/preview` : url;
 }
@@ -177,7 +44,7 @@ function formatarEstoque(qtd) {
     return `<span>restam ${qtd} unidades</span>`;
 }
 
-/* --- LÓGICA DE DADOS --- */
+/* --- LÓGICA DE DADOS (MAPEAMENTO ATUALIZADO) --- */
 
 async function carregarDados() {
     try {
@@ -194,17 +61,32 @@ async function carregarDados() {
                 id: get(0).toLowerCase().replace(/[\s-_]/g, ''),
                 nome: get(2), 
                 estoque: parseInt(get(3)) || 0,
-                endereco: get(4) + ", " + get(5),
-                previsao: get(7), valor: get(8), plantas: `de ${get(9)} até ${get(10)}`,
-                obra: get(11), local: get(12), mobilidade: get(13), 
-                cultura: get(14), comercio: get(15), saude: get(16),
-                dica: get(17), obs: get(18),
-                // Mapeamento de Links (Colunas 19 a 36)
-                book: formatarLinkSeguro(get(19)),
-                video1: formatarLinkSeguro(get(20)),
-                video2: formatarLinkSeguro(get(21)),
-                plantasLinks: [get(22), get(23), get(24), get(25), get(26)].map(formatarLinkSeguro),
-                divLinks: [get(27), get(28), get(29), get(30), get(31), get(32), get(33), get(34), get(35), get(36)].map(formatarLinkSeguro)
+                endereco: get(4) + (get(5) ? ", " + get(5) : ""),
+                cidade: get(6),
+                previsao: get(7), 
+                valor: get(8), 
+                plantas: `de ${get(9)} até ${get(10)}`,
+                obra: get(11), 
+                local: get(12), 
+                mobilidade: get(13), 
+                cultura: get(14), 
+                comercio: get(15), 
+                saude: get(16),
+                dica: get(17), 
+                obs: get(18),
+                // Novos Canais de Links baseados na sua lista
+                bookCliente: formatarLinkSeguro(get(19)),
+                bookCorretor: formatarLinkSeguro(get(20)),
+                video1: formatarLinkSeguro(get(21)),
+                video2: formatarLinkSeguro(get(22)),
+                apVaranda: formatarLinkSeguro(get(23)),
+                apSemVaranda: formatarLinkSeguro(get(24)),
+                apGarden: formatarLinkSeguro(get(25)),
+                outroAp: formatarLinkSeguro(get(26)),
+                localizacaoLink: formatarLinkSeguro(get(28)), // Coluna 28 Conforme sua lista
+                descritivo: formatarLinkSeguro(get(29)),
+                // Materiais Diversos (Diversos 1 ao 9 mapeados)
+                diversos: [get(30), get(31), get(32), get(33), get(34), get(35), get(36), get(37), get(38)].map(formatarLinkSeguro)
             };
         }).filter(item => item.id !== "");
     } catch (e) { console.error("Erro CSV:", e); }
@@ -226,8 +108,13 @@ async function copiarLink(url, btnElement, textoOriginal) {
     try {
         await navigator.clipboard.writeText(url);
         btnElement.textContent = "✅ Link Copiado!";
+        // Estilo temporário de confirmação
+        const bgOriginal = btnElement.style.background;
         btnElement.style.background = "#000";
-        setTimeout(() => { btnElement.textContent = textoOriginal; btnElement.style.background = ""; }, 2000);
+        setTimeout(() => { 
+            btnElement.textContent = textoOriginal; 
+            btnElement.style.background = bgOriginal; 
+        }, 2000);
     } catch (err) { alert("Erro ao copiar."); }
 }
 
@@ -267,19 +154,27 @@ function abrirFicha(res) {
     if (res.dica) { dicaBox.innerHTML = `💡 <strong>Dica:</strong> ${res.dica}`; dicaBox.style.display = "block"; } else { dicaBox.style.display = "none"; }
     if (res.obs) { obsBox.innerHTML = `⚠️ <strong>Obs:</strong> ${res.obs}`; obsBox.style.display = "block"; } else { obsBox.style.display = "none"; }
 
-    // Gerar botões de links dinamicamente
+    // Gerar botões de links dinamicamente com os novos nomes
     let botoesHTML = "";
     
-    if (res.book) botoesHTML += `<button onclick="copiarLink('${res.book}', this, '📄 Copiar Link do Book PDF')" class="btn-acao btn-book">📄 Copiar Link do Book PDF</button>`;
-    if (res.video1) botoesHTML += `<button onclick="copiarLink('${res.video1}', this, '🎥 Copiar Link do Vídeo')" class="btn-acao btn-video">🎥 Copiar Link do Vídeo</button>`;
-    if (res.video2) botoesHTML += `<button onclick="copiarLink('${res.video2}', this, '🎥 Copiar Link do Vídeo 2')" class="btn-acao btn-video">🎥 Copiar Link do Vídeo 2</button>`;
+    // Books em Verde
+    if (res.bookCliente) botoesHTML += `<button onclick="copiarLink('${res.bookCliente}', this, '📄 Copiar Book do Cliente')" class="btn-acao btn-book">📄 Copiar Book do Cliente</button>`;
+    if (res.bookCorretor) botoesHTML += `<button onclick="copiarLink('${res.bookCorretor}', this, '📄 Copiar Book do Corretor')" class="btn-acao btn-book">📄 Copiar Book do Corretor</button>`;
     
-    res.plantasLinks.forEach((link, i) => {
-        if (link) botoesHTML += `<button onclick="copiarLink('${link}', this, '📐 Copiar Link Planta ${i+1}')" class="btn-acao btn-planta">📐 Copiar Link Planta ${i+1}</button>`;
-    });
+    // Vídeos e Plantas em Laranja
+    if (res.video1) botoesHTML += `<button onclick="copiarLink('${res.video1}', this, '🎥 Copiar Vídeo 1')" class="btn-acao">🎥 Copiar Vídeo 1</button>`;
+    if (res.video2) botoesHTML += `<button onclick="copiarLink('${res.video2}', this, '🎥 Copiar Vídeo 2')" class="btn-acao">🎥 Copiar Vídeo 2</button>`;
+    if (res.apVaranda) botoesHTML += `<button onclick="copiarLink('${res.apVaranda}', this, '📐 Copiar Apart. com Varanda')" class="btn-acao">📐 Copiar Apart. com Varanda</button>`;
+    if (res.apSemVaranda) botoesHTML += `<button onclick="copiarLink('${res.apSemVaranda}', this, '📐 Copiar Apart. sem Varanda')" class="btn-acao">📐 Copiar Apart. sem Varanda</button>`;
+    if (res.apGarden) botoesHTML += `<button onclick="copiarLink('${res.apGarden}', this, '📐 Copiar Apart. Garden')" class="btn-acao">📐 Copiar Apart. Garden</button>`;
+    if (res.outroAp) botoesHTML += `<button onclick="copiarLink('${res.outroAp}', this, '📐 Copiar Outro apart.')" class="btn-acao">📐 Copiar Outro apart.</button>`;
+    
+    // Localização e Diversos
+    if (res.localizacaoLink) botoesHTML += `<button onclick="copiarLink('${res.localizacaoLink}', this, '📍 Copiar Localização')" class="btn-acao">📍 Copiar Localização</button>`;
+    if (res.descritivo) botoesHTML += `<button onclick="copiarLink('${res.descritivo}', this, '📝 Copiar Descritivo')" class="btn-acao">📝 Copiar Descritivo</button>`;
 
-    res.divLinks.forEach((link, i) => {
-        if (link) botoesHTML += `<button onclick="copiarLink('${link}', this, '🔗 Copiar Material Extra ${i+1}')" class="btn-acao btn-extra">🔗 Copiar Material Extra ${i+1}</button>`;
+    res.diversos.forEach((link, i) => {
+        if (link) botoesHTML += `<button onclick="copiarLink('${link}', this, '🔗 Copiar Diversos ${i+1}')" class="btn-acao">🔗 Copiar Diversos ${i+1}</button>`;
     });
 
     infoBox.innerHTML = `
@@ -309,18 +204,23 @@ function configurarEventos() {
         p.onclick = (e) => {
             if (p.closest(".caixa-minimizada")) return;
             const idNormalizado = p.id.toLowerCase().replace(/[\s-_]/g, '');
+            
             if (idNormalizado === "grandesaopaulo") {
                 e.stopPropagation();
                 trocarMapas(document.getElementById("container-gsp"));
                 return;
             }
+
+            // AÇÃO PARA QUALQUER CLIQUE: Mostrar nome no topo sempre
+            display.textContent = obterNomeFormatado(p.id);
+
             if (!p.classList.contains("commrv")) {
-                display.textContent = obterNomeFormatado(p.id);
                 if(pathSelecionado) pathSelecionado.classList.remove("ativo");
                 pathSelecionado = null;
                 resetInterface();
                 return;
             }
+
             e.stopPropagation();
             if (pathSelecionado === p) {
                 p.classList.remove("ativo");
@@ -331,10 +231,11 @@ function configurarEventos() {
                 if (pathSelecionado) pathSelecionado.classList.remove("ativo");
                 pathSelecionado = p;
                 p.classList.add("ativo");
-                display.textContent = obterNomeFormatado(p.id);
                 gerarBotoes(p.id);
             }
         };
+
+        // Hover para mostrar nomes (Desktop)
         p.onmouseenter = () => {
             if (window.innerWidth >= 900 && !p.closest(".caixa-minimizada")) {
                 display.textContent = obterNomeFormatado(p.id);
