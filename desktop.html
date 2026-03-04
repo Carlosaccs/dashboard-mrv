@@ -27,35 +27,35 @@
         .col-lateral-dir { width: 32%; background: #fff; padding: 15px; overflow-y: auto; border-left: 1px solid #ddd; }
         .col-central { flex: 1; display: flex; flex-direction: column; background: #fff; position: relative; overflow: hidden; }
 
-        /* --- ESTILIZAÇÃO DOS BOTÕES LATERAIS (btRes) --- */
+        /* --- BOTÕES LATERAIS (btRes) --- */
         .btRes { 
-            width: 100%; padding: 8px 12px; margin-bottom: 4px; background: transparent; 
+            width: 100%; padding: 8px 12px; margin-bottom: 6px; background: transparent; 
             border: none; border-left: 5px solid rgb(6, 94, 3); 
             text-align: left; cursor: pointer; font-size: 0.72rem; 
             border-radius: 4px; display: flex; justify-content: space-between; align-items: center;
-            transition: all 0.2s;
+            transition: all 0.1s ease-in-out;
             color: #333;
+            outline: 2px solid transparent; /* Reserva o espaço do contorno */
         }
 
-        /* Hover: Fundo cinza, borda esquerda laranja e contorno preto */
+        /* Hover: Contorno Preto */
         .btRes:hover { 
-            background: #e0e0e0; 
+            background: #f0f0f0; 
             border-left-color: #ff8c00; 
             outline: 2px solid #000; 
             outline-offset: -2px;
         }
 
-        /* Ativo (Clicado): Fundo laranja, borda esquerda verde, texto branco e contorno laranja */
+        /* ATIVO: Fundo Laranja, Borda Verde, Texto Branco, Contorno Verde FIXO */
         .btRes.ativo { 
             background: #ff8c00 !important; 
             border-left-color: rgb(6, 94, 3) !important; 
             color: white !important; 
-            outline: 2px solid #ff8c00 !important; 
+            outline: 2px solid rgb(6, 94, 3) !important; 
             outline-offset: -2px;
             font-weight: bold;
         }
 
-        /* Garante que o texto e o estoque fiquem brancos quando o botão estiver ativo */
         .btRes.ativo strong, 
         .btRes.ativo .estoque-status { 
             color: white !important; 
@@ -66,8 +66,8 @@
         .estoque-status { font-size: 0.65rem; font-weight: bold; color: #666; white-space: nowrap; }
         .estoque-alerta { color: #d32f2f !important; }
         .estoque-vendido { text-decoration: line-through; color: #999 !important; }
-        /* --- FIM DOS BOTÕES --- */
 
+        /* --- RESTANTE DO LAYOUT --- */
         .centro-topo { height: 40px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem; border-bottom: 1px solid #eee; background: #fdfdfd; color: #333; }
         
         .container-mapas { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; border: none; }
@@ -108,25 +108,14 @@
         .btn-abrir { background: #065e03; }
         .btn-copiar { background: #ff8c00; }
 
-        /* Modal e Toast */
-        .modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 1000; }
-        .modal-caixa { background: white; width: 90%; max-width: 550px; padding: 30px; border-radius: 12px; position: relative; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        .modal-fechar { position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 1.5rem; color: #bbb; }
-        .modal-titulo { color: rgb(6, 94, 3); font-weight: bold; margin-bottom: 20px; font-size: 1.3rem; text-align: center; width: 100%; display: block; }
-        
-        .modal-corpo { font-size: 0.85rem; color: #444; line-height: 1.6; }
-        .modal-corpo p { margin-bottom: 15px; }
-        .modal-aviso { color: #333; font-weight: normal; }
-        .modal-aviso strong { color: #d32f2f; }
-        .modal-colab { margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px; }
-        
-        .btn-whatsapp { display: block; background: #25d366; color: white; padding: 12px; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 1rem; transition: 0.3s; margin-top: 20px; text-align: center; }
-        .btn-whatsapp:hover { background: #1eb954; transform: translateY(-2px); }
-        
         #toast { visibility: hidden; min-width: 200px; background-color: #333; color: #fff; text-align: center; border-radius: 4px; padding: 10px; position: fixed; z-index: 1000; left: 50%; top: 30px; transform: translateX(-50%); font-size: 0.8rem; }
         #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 1.5s; }
         @keyframes fadein { from {top: 0; opacity: 0;} to {top: 30px; opacity: 1;} }
         @keyframes fadeout { from {top: 30px; opacity: 1;} to {top: 0; opacity: 0;} }
+
+        .modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 1000; }
+        .modal-caixa { background: white; width: 90%; max-width: 550px; padding: 30px; border-radius: 12px; position: relative; }
+        .btn-whatsapp { display: block; background: #25d366; color: white; padding: 12px; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 1rem; margin-top: 20px; text-align: center; }
     </style>
 </head>
 <body>
@@ -154,16 +143,10 @@
 
     <div class="modal-overlay" id="modal-sobre" onclick="toggleModal(false)">
         <div class="modal-caixa" onclick="event.stopPropagation()">
-            <span class="modal-fechar" onclick="toggleModal(false)">&times;</span>
-            <div class="modal-titulo">Sobre o Projeto</div>
-            <div class="modal-corpo">
-                <p>Este dashboard foi desenvolvido para agilizar o acesso a informações básicas sobre os residenciais MRV de SP, auxiliando no atendimento rápido aos nossos leads.</p>
-                <p class="modal-aviso">⚠️ <strong>Aviso Importante:</strong> As informações mostradas podem estar desatualizadas e até incorretas.</p>
-                <div class="modal-colab">
-                    <p>🤝 <strong>Colabore com o projeto!</strong></p>
-                    <p>Sentiu falta de algum material?<br>
-                    Se você tiver <strong>Books (PDF), Vídeos</strong> ou fotos de decorados que ainda não estão aqui, se encontrou alguma informação incorreta, se pode colaborar com dicas melhores ou observações sobre um residencial, por favor, envie para que possamos manter a ferramenta completa para todos.</p>
-                </div>
+            <div style="color:rgb(6,94,3); font-weight:bold; font-size:1.3rem; margin-bottom:15px; text-align:center;">Sobre o Projeto</div>
+            <div style="font-size:0.85rem; color:#444; line-height:1.6;">
+                <p>Dashboard para consulta rápida de materiais e informações MRV em SP.</p>
+                <p style="margin-top:10px;">⚠️ <strong>Aviso:</strong> Verifique sempre a disponibilidade atual no sistema oficial.</p>
             </div>
             <a href="https://wa.me/551192617026" target="_blank" class="btn-whatsapp">Carlos Custódio - (11) 9261-7026</a>
         </div>
@@ -278,13 +261,6 @@
                     ${item.dica ? `<div class="bloco-texto dica-box"><span class="bloco-label">💡 DICA</span>${item.dica}</div>` : ''}
                     ${item.obs ? `<div class="bloco-texto obs-box"><span class="bloco-label">📝 OBSERVAÇÕES</span>${item.obs}</div>` : ''}
                     
-                    ${(item.loc || item.mob) ? '<span class="secao-titulo">Destaques da Região</span>' : ''}
-                    ${renderDestaque("Localização", item.loc, "📍")}
-                    ${renderDestaque("Mobilidade", item.mob, "🚌")}
-                    ${renderDestaque("Cultura e Lazer", item.cult, "🌳")}
-                    ${renderDestaque("Comércio", item.com, "🛒")}
-                    ${renderDestaque("Saúde e Educação", item.saude, "🏥")}
-
                     <span class="secao-titulo">Materiais de Venda</span>
                     ${renderLinkRow("Book Cliente", item.book_cli, "📄")}
                     ${renderLinkRow("Book Corretor", item.book_cor, "🔐")}
@@ -319,8 +295,8 @@
 
         function obterHtmlEstoque(valor) {
             let num = parseInt(valor) || 0;
-            let classe = "estoque-status";
             let texto = (valor === "VENDIDO" || num === 0) ? "VENDIDO" : `restam ${num} un.`;
+            let classe = "estoque-status";
             if (valor === "VENDIDO" || num === 0) classe += " estoque-vendido";
             else if (num < 6) classe += " estoque-alerta";
             return `<span class="${classe}">${texto}</span>`;
